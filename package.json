@@ -23,6 +23,9 @@
   "devDependencies": {
     "gulp-util": "~2.2.14",
     "gulp-csslint": "~0.1.3",
-    "gulp-notify": "~1.2.1"
+    "gulp-notify": "~1.2.1",
+    "gulp-htmlhint": "0.0.7",
+    "gulp-size": "~0.1.3",
+    "gulp-csscss": "0.0.2"
   }
 }
