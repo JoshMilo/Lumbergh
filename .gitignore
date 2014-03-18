@@ -1,3 +1,4 @@
 /node_modules/
 *.codekit
 *.DS_Store
+*.log
