@@ -29,6 +29,8 @@
     "gulp-csscss": "0.0.2",
     "gulp-w3cjs": "~0.1.2",
     "gulp-uncss": "~0.4.0",
-    "gulp-cleanhtml": "0.0.2"
+    "gulp-cleanhtml": "0.0.2",
+    "gulp-plumber": "~0.5.6",
+    "gulp-sitemap": "~0.1.3"
   }
 }

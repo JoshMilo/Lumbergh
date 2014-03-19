@@ -5,6 +5,8 @@ var gulp = require('gulp'),
     csslint = require('gulp-csslint'),
     htmlhint = require('gulp-htmlhint'),
     notify = require('gulp-notify'),
+    plumber = require('gulp-plumber'),
+    size = require('gulp-size'),
     uncss = require('gulp-uncss'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util');
@@ -13,6 +15,7 @@ var gulp = require('gulp'),
 
 gulp.task('markymark', function() {
   gulp.src('build/*.html')
+    .pipe(plumber())
     .pipe(htmlhint())
     .pipe(htmlhint.reporter())
     .pipe(notify("The Funky Bunch has hinted."));
@@ -20,6 +23,7 @@ gulp.task('markymark', function() {
 
 gulp.task('wildstyle', function() {
   gulp.src('build/css/*.css')
+    .pipe(plumber())
     .pipe(csslint())
     .pipe(csslint.reporter())
     .pipe(notify("All right, all right, all right! CSS busted"));
@@ -33,6 +37,7 @@ gulp.task('validation', function() {
 
 gulp.task('uncss', function() {
   gulp.src('build/css/*.css')
+    .pipe(plumber())
     .pipe(uncss({
       html: ['build/index.html']
     }))
@@ -40,9 +45,15 @@ gulp.task('uncss', function() {
     pipe(notify('Removed unused styles'));
 });
 
-gulp.task('cleanmarkup', function() {
+gulp.task('cleanhtml', function() {
   gulp.src('build/*.html')
+    .pipe(plumber())
     .pipe(cleanhtml())
     .pipe(gulp.dest('build/linted'))
     .pipe(notify('Cleaned up html'));
+});
+
+gulp.task('size', function() {
+  gulp.src('build')
+    .pipe(size(showFiles));
 });
