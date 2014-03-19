@@ -23,13 +23,7 @@ gulp.task('wildstyle', function() {
     .pipe(csslint.reporter())
     .pipe(notify("All right, all right, all right! CSS busted"));
 });
-/*
-gulp.task('dstyle', function() {
-  gulp.src('build/css/*.css')
-    .pipe(csscss())
-    .pipe(gulp.dest('doubles.css'));
-});
-*/
+
 gulp.task('validation', function() {
   gulp.src('build/*.html')
     .pipe(w3cjs())
@@ -43,3 +37,10 @@ gulp.task('uncss', function() {
     }))
     .pipe(gulp.dest('build/css/out'));
 });
+/*
+gulp.task('dstyle', function() {
+  gulp.src('build/css/*.css')
+    .pipe(csscss())
+    .pipe(gulp.dest('doubles.css'));
+});
+*/
