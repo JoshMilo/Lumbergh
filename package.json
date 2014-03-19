@@ -27,6 +27,7 @@
     "gulp-htmlhint": "0.0.7",
     "gulp-size": "~0.1.3",
     "gulp-csscss": "0.0.2",
-    "gulp-w3cjs": "~0.1.2"
+    "gulp-w3cjs": "~0.1.2",
+    "gulp-uncss": "~0.4.0"
   }
 }
