@@ -1,7 +1,7 @@
-// QA specific gulpfile
+// QA specific gulpfile. Had problems with csscss so haven't put that in yet.
 
 var gulp = require('gulp'),
-    //csscss = require('gulp-csscss'),
+    cleanhtml = require('gulp-cleanhtml'),
     csslint = require('gulp-csslint'),
     htmlhint = require('gulp-htmlhint'),
     notify = require('gulp-notify'),
@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util');
 
+    //Idividual Tasks
 
 gulp.task('markymark', function() {
   gulp.src('build/*.html')
@@ -35,12 +36,13 @@ gulp.task('uncss', function() {
     .pipe(uncss({
       html: ['build/index.html']
     }))
-    .pipe(gulp.dest('build/css/out'));
+    .pipe(gulp.dest('build/linted/css'))
+    pipe(notify('Removed unused styles'));
 });
-/*
-gulp.task('dstyle', function() {
-  gulp.src('build/css/*.css')
-    .pipe(csscss())
-    .pipe(gulp.dest('doubles.css'));
+
+gulp.task('cleanmarkup', function() {
+  gulp.src('build/*.html')
+    .pipe(cleanhtml())
+    .pipe(gulp.dest('build/linted'))
+    .pipe(notify('Cleaned up html'));
 });
-*/
