@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     cleanhtml = require('gulp-cleanhtml'),
     csslint = require('gulp-csslint'),
     htmlhint = require('gulp-htmlhint'),
+    jshint = require('gulp-jshint'),
     notify = require('gulp-notify'),
     plumber = require('gulp-plumber'),
     size = require('gulp-size'),
@@ -11,7 +12,7 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util');
 
-    //Idividual Tasks
+    //Individual Tasks
 
 gulp.task('markymark', function() {
   gulp.src('build/*.html')
@@ -57,3 +58,17 @@ gulp.task('size', function() {
   gulp.src('build')
     .pipe(size(showFiles));
 });
+
+gulp.task('jshint', function() {
+  gulp.src('build/js/*.js')
+    .pipe(jshint('build/js/.jshintrc'))
+    .pipe(jshint.reporter('default'))
+    .pipe(notify('JS has been hinted'));
+});
+
+
+
+
+
+
+
