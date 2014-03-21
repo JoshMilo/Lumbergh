@@ -65,10 +65,3 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'))
     .pipe(notify('JS has been hinted'));
 });
-
-
-
-
-
-
-
