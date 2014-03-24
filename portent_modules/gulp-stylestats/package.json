@@ -1,0 +1,25 @@
+{
+  "name": "gulp-stylestats",
+  "version": "0.0.1",
+  "description": "Outputs stylestats data to a JSON file",
+  "license": "MIT",
+  "author": {
+    "name": "Matthew Meyers",
+    "email": "hello@matthewmey.rs",
+    "url": "http://matthewmey.rs"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "gulpplugin"
+  ],
+  "devDependencies": {
+    "through2": "^0.4.1",
+    "mkdirp": "^0.3.5",
+    "stylestats": "^2.3.0"
+  }
+}
