@@ -10,9 +10,11 @@ var gulp = require('gulp'),
     size = require('gulp-size'),
     uncss = require('gulp-uncss'),
     w3cjs = require('gulp-w3cjs'),
+    stylestats = require('gulp-stylestats-report'),
     gulputil = require('gulp-util');
 
     //Individual Tasks
+
 
 gulp.task('markymark', function() {
   gulp.src('build/*.html')
@@ -64,4 +66,9 @@ gulp.task('jshint', function() {
     .pipe(jshint('build/js/.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(notify('JS has been hinted'));
+});
+
+gulp.task('stylestats', function () {
+  gulp.src('build/css/*.css')
+    .pipe(stylestats({ reportDir: './reports' }));
 });
