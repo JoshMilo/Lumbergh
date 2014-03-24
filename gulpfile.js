@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     size = require('gulp-size'),
     uncss = require('gulp-uncss'),
     w3cjs = require('gulp-w3cjs'),
-    stylestats = require('./portent_modules/gulp-stylestats'),
+    stylestats = require('gulp-stylestats-report'),
     gulputil = require('gulp-util');
 
     //Individual Tasks
