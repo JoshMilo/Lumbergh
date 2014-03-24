@@ -69,6 +69,6 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('stylestats', function () {
-    gulp.src('build/css/*.css')
-        .pipe(stylestats({ reportDir: './reports' }));
+  gulp.src('build/css/*.css')
+    .pipe(stylestats({ reportDir: './reports' }));
 });
