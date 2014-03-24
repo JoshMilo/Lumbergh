@@ -1,4 +1,4 @@
-// QA specific gulpfile. Had problems with csscss so haven't put that in yet.
+// QA specific gulpfile.
 
 var gulp = require('gulp'),
     cleanhtml = require('gulp-cleanhtml'),
