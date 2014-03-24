@@ -70,5 +70,5 @@ gulp.task('jshint', function() {
 
 gulp.task('stylestats', function () {
   gulp.src('build/css/*.css')
-    .pipe(stylestats({ reportDir: './reports' }));
+    .pipe(stylestats({ reportDir: './reports/json' }));
 });
