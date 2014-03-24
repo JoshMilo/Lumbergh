@@ -12,6 +12,11 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util');
 
+var fs = require('fs'),
+    mkdirp = require('mkdirp');
+
+var reportsDir = './reports/json'
+
     //Individual Tasks
 
 gulp.task('markymark', function() {
@@ -23,10 +28,18 @@ gulp.task('markymark', function() {
 });
 
 gulp.task('wildstyle', function() {
+  mkdirp(reportsDir);
+
+  var jsonReporter = function (file) {
+    if (file && file.csslint) {
+      fs.writeFileSync(reportsDir + '/csshint-' + file.path.split('/').pop().split('.').shift() + '.json', JSON.stringify(file.csslint, null, 2));
+    }
+  };
+
   gulp.src('build/css/*.css')
     .pipe(plumber())
     .pipe(csslint())
-    .pipe(csslint.reporter())
+    .pipe(csslint.reporter(jsonReporter))
     .pipe(notify("All right, all right, all right! CSS busted"));
 });
 
