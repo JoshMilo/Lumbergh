@@ -22,7 +22,7 @@ var reportsDir = './reports/json'
 gulp.task('markymark', function() {
   var jsonReporter = function (file) {
     if (file && file.htmlhint) {
-      fs.writeFileSync(reportsDir + '/htmlhint-' + file.path.split('/').pop().split('.').shift() + '.json', JSON.stringify(file.htmlhint, null, 2));
+      fs.writeFileSync(reportsDir + '/htmlhint-' + file.path.split('/').pop().replace(/\.[^\.]+$/, '') + '.json', JSON.stringify(file.htmlhint, null, 2));
     }
   };
 
@@ -38,7 +38,7 @@ gulp.task('wildstyle', function() {
 
   var jsonReporter = function (file) {
     if (file && file.csslint) {
-      fs.writeFileSync(reportsDir + '/csshint-' + file.path.split('/').pop().split('.').shift() + '.json', JSON.stringify(file.csslint, null, 2));
+      fs.writeFileSync(reportsDir + '/csshint-' + file.path.split('/').pop().replace(/\.[^\.]+$/, '') + '.json', JSON.stringify(file.csslint, null, 2));
     }
   };
 
@@ -62,7 +62,7 @@ gulp.task('uncss', function() {
       html: ['build/index.html']
     }))
     .pipe(gulp.dest('build/linted/css'))
-    pipe(notify('Removed unused styles'));
+    .pipe(notify('Removed unused styles'));
 });
 
 gulp.task('cleanhtml', function() {
@@ -79,8 +79,18 @@ gulp.task('size', function() {
 });
 
 gulp.task('jshint', function() {
+  var jsonReporter = function (results, data, s2) {
+    var filename = results[0].file.split('/').pop().replace(/\.[^\.]+$/, '');
+    var output = {
+      results: results,
+      data: data
+    };
+
+    fs.writeFileSync(reportsDir + '/jshint-' + filename + '.json', JSON.stringify(output, null, 2));
+  };
+
   gulp.src('build/js/*.js')
     .pipe(jshint('build/js/.jshintrc'))
-    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter(jsonReporter))
     .pipe(notify('JS has been hinted'));
 });
