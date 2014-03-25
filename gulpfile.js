@@ -20,10 +20,16 @@ var reportsDir = './reports/json'
     //Individual Tasks
 
 gulp.task('markymark', function() {
+  var jsonReporter = function (file) {
+    if (file && file.htmlhint) {
+      fs.writeFileSync(reportsDir + '/htmlhint-' + file.path.split('/').pop().split('.').shift() + '.json', JSON.stringify(file.htmlhint, null, 2));
+    }
+  };
+
   gulp.src('build/*.html')
     .pipe(plumber())
     .pipe(htmlhint())
-    .pipe(htmlhint.reporter())
+    .pipe(htmlhint.reporter(jsonReporter))
     .pipe(notify("The Funky Bunch has hinted."));
 });
 
