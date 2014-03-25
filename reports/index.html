@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Report</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+  <script src="js/handlebars-v1.3.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+  <script id="simple-template" type="text/x-handlebars-template">
+  <h1>QA Report</h1>
+  <p>
+    {{published}}
+  </p>
+  <p>
+    {{stylesheets}}
+  </p>
+  <p>
+    {{size}}
+  </p>
+  </script>
+  <script>
+    $(document).ready(function() {
+      var raw_template = $('#simple-template').html();
+      var template = Handlebars.compile(raw_template);
+      var placeHolder = $("#main");
+      $.getJSON("stylestats.json", function(data) {
+        var html = template(data);
+        placeHolder.append(html);
+      });
+    });
+  </script>
+
+  <div id="main">
+
+  </div>
+</body>
+</html>
