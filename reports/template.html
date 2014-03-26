@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>QA Report</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
   <link rel="stylesheet" href="css/flat-ui.css">
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/handlebars-v1.3.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="js/sugar.js"></script>
 </head>
 <body class="container">
 
-<a href="/template.html">template</a>
-
-<div class="pure-g-r">
+  <script id="stylestat-template" type="text/x-handlebars-template">
+    <div class="pure-g-r">
   <div class="pure-u-1">
     <h1 class="header">Lumbergh Report</h1>
     <p class="sub-hdr">Stylesheet Snapshot</p>
   </div>
 </div>
 
-<div class="pure-g-r">
-  <div class="pure-u-1-1">
+<div class="pure-g">
+  <div class="pure-u-1">
     <table class="pure-table table table-bordered">
       <thead>
         <tr>
@@ -43,23 +44,38 @@
           <td>{{size}}</td>
            <td>{{rules}}</td>
            <td>{{selectors}}</td>
-           <td>{{simplicity}}</td>
-           <td>{{mostIdentifiersSelector}}</td> 
+           <td id="simple">{{simplicity}}</td>
+           <td>{{mostIdentifersSelector}}</td> 
            <td>{{mediaQueries}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-</div> <!--end pure-g-r -->
 
-<div class="pure-g-r">
-  <div class="pure-u-1-4">
-    <h2>Unique Font Sizes: {{totalUniqueFontSizes}}</h2>
+</div>
+  </script>
+
+
+
+  <!--loads the handlebars template-->
+  <script>
+    $(function() {
+      var raw_template = $('#stylestat-template').html();
+      var template = Handlebars.compile(raw_template);
+      var placeHolder = $("#main");
+      $.getJSON("json/stylestats.json", function(data) {
+        var html = template(data);
+        placeHolder.append(html);
+      });
+    });
+  </script>
+
+  <script>
+    
+  </script>
+
+  <div id="main">
 
   </div>
-  <div class="pure-u-1-4"></div>
-  <div class="pure-u-1-4"></div>
-</div> <!--end pure-g-r -->
-
 </body>
 </html>
