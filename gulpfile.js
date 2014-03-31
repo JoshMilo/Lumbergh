@@ -10,14 +10,8 @@ var gulp = require('gulp'),
     size = require('gulp-size'),
     uncss = require('gulp-uncss'),
     w3cjs = require('gulp-w3cjs'),
-    gulputil = require('gulp-util'),
-    clean = require('gulp-clean');
-
-var fs = require('fs'),
-    mkdirp = require('mkdirp'),
-    runSequence = require('run-sequence');
-
-var reportsDir = './reports/json'
+    stylestats = require('gulp-stylestats-report'),
+    gulputil = require('gulp-util');
 
     //Individual Tasks
 
@@ -28,47 +22,39 @@ gulp.task('markymark', function() {
     }
   };
 
-  return gulp.src('build/*.html')
+  gulp.src('build/*.html')
     .pipe(plumber())
     .pipe(htmlhint())
-    .pipe(htmlhint.reporter(jsonReporter))
+    .pipe(htmlhint.reporter())
     .pipe(notify("The Funky Bunch has hinted."));
 });
 
 gulp.task('wildstyle', function() {
-  mkdirp(reportsDir);
-
-  var jsonReporter = function (file) {
-    if (file && file.csslint) {
-      fs.writeFileSync(reportsDir + '/csshint-' + file.path.split('/').pop().replace(/\.[^\.]+$/, '') + '.json', JSON.stringify(file.csslint, null, 2));
-    }
-  };
-
-  return gulp.src('build/css/*.css')
+  gulp.src('build/css/*.css')
     .pipe(plumber())
     .pipe(csslint())
-    .pipe(csslint.reporter(jsonReporter))
+    .pipe(csslint.reporter())
     .pipe(notify("All right, all right, all right! CSS busted"));
 });
 
 gulp.task('validation', function() {
-  return gulp.src('build/*.html')
+  gulp.src('build/*.html')
     .pipe(w3cjs())
     .pipe(notify("Validation Complete!"));
 });
 
 gulp.task('uncss', function() {
-  return gulp.src('build/css/*.css')
+  gulp.src('build/css/*.css')
     .pipe(plumber())
     .pipe(uncss({
       html: ['build/index.html']
     }))
     .pipe(gulp.dest('build/linted/css'))
-    .pipe(notify('Removed unused styles'));
+    pipe(notify('Removed unused styles'));
 });
 
 gulp.task('cleanhtml', function() {
-  return gulp.src('build/*.html')
+  gulp.src('build/*.html')
     .pipe(plumber())
     .pipe(cleanhtml())
     .pipe(gulp.dest('build/linted'))
@@ -76,22 +62,12 @@ gulp.task('cleanhtml', function() {
 });
 
 gulp.task('size', function() {
-  return gulp.src('build')
+  gulp.src('build')
     .pipe(size(showFiles));
 });
 
 gulp.task('jshint', function() {
-  var jsonReporter = function (results, data, s2) {
-    var filename = results[0].file.split('/').pop().replace(/\.[^\.]+$/, '');
-    var output = {
-      results: results,
-      data: data
-    };
-
-    fs.writeFileSync(reportsDir + '/jshint-' + filename + '.json', JSON.stringify(output, null, 2));
-  };
-
-  return gulp.src('build/js/*.js')
+  gulp.src('build/js/*.js')
     .pipe(jshint('build/js/.jshintrc'))
     .pipe(jshint.reporter(jsonReporter))
     .pipe(notify('JS has been hinted'));

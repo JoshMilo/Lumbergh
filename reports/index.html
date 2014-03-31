@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+  <link rel="stylesheet" href="css/flat-ui.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/sugar.js"></script>
+</head>
+<body class="container">
+
+<a href="/template.html">template</a>
+
+<div class="pure-g-r">
+  <div class="pure-u-1">
+    <h1 class="header">Lumbergh Report</h1>
+    <p class="sub-hdr">Stylesheet Snapshot</p>
+  </div>
+</div>
+
+<div class="pure-g-r">
+  <div class="pure-u-1-1">
+    <table class="pure-table table table-bordered">
+      <thead>
+        <tr>
+          <th>Published</th>
+          <th>Paths</th>
+          <th>Files</th>
+          <th>Size</th>
+          <th>Rules</th>
+          <th>Selectors</th>
+          <th>Simplicity</th>
+          <th>Most Used</th>
+          <th>Media Queries</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{published}}</td>
+          <td>{{paths}}</td>
+          <td>{{stylesheets}}</td>
+          <td>{{size}}</td>
+           <td>{{rules}}</td>
+           <td>{{selectors}}</td>
+           <td>{{simplicity}}</td>
+           <td>{{mostIdentifiersSelector}}</td> 
+           <td>{{mediaQueries}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!--end pure-g-r -->
+
+<div class="pure-g-r">
+  <div class="pure-u-1-4">
+    <h2>Unique Font Sizes: {{totalUniqueFontSizes}}</h2>
+
+  </div>
+  <div class="pure-u-1-4"></div>
+  <div class="pure-u-1-4"></div>
+</div> <!--end pure-g-r -->
+
+</body>
+</html>

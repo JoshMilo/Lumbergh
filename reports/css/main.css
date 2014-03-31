@@ -1,0 +1,27 @@
+/* helper classes */
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+.header,.sub-hdr {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+.sub-hdr {
+  width: 15%;
+}
+.container {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.myclass {
+  font-size: 20px;
+}
