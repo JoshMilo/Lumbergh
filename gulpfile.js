@@ -1,4 +1,4 @@
-// QA specific gulpfile.
+// QA specific gulpfile. Had problems with csscss so haven't put that in yet.
 
 var gulp = require('gulp'),
     cleanhtml = require('gulp-cleanhtml'),
@@ -15,8 +15,13 @@ var gulp = require('gulp'),
 
     //Individual Tasks
 
-
 gulp.task('markymark', function() {
+  var jsonReporter = function (file) {
+    if (file && file.htmlhint) {
+      fs.writeFileSync(reportsDir + '/htmlhint-' + file.path.split('/').pop().replace(/\.[^\.]+$/, '') + '.json', JSON.stringify(file.htmlhint, null, 2));
+    }
+  };
+
   gulp.src('build/*.html')
     .pipe(plumber())
     .pipe(htmlhint())
@@ -64,11 +69,34 @@ gulp.task('size', function() {
 gulp.task('jshint', function() {
   gulp.src('build/js/*.js')
     .pipe(jshint('build/js/.jshintrc'))
-    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter(jsonReporter))
     .pipe(notify('JS has been hinted'));
 });
 
-gulp.task('stylestats', function () {
-  gulp.src('build/css/*.css')
-    .pipe(stylestats({ reportDir: './reports/json' }));
+gulp.task('clean-reports', function () {
+  return gulp.src('./reports/json')
+    .pipe(clean());
+});
+
+gulp.task('reports-index', function (cb) {
+  var reports = fs.readdirSync('./reports/json/');
+  var output = {
+    css: [],
+    html: [],
+    js: []
+  };
+
+  for (var i = reports.length - 1; i >= 0; i--) {
+    if (/^csshint/.test(reports[i])) output.css.push(reports[i]);
+    if (/^jshint/.test(reports[i])) output.js.push(reports[i]);
+    if (/^htmlhint/.test(reports[i])) output.html.push(reports[i]);
+  };
+
+  fs.writeFileSync(reportsDir + '/index.json', JSON.stringify(output, null, 2));
+
+  cb();
+});
+
+gulp.task('generate-reports', function (cb) {
+  runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark'], 'reports-index', cb);
 });
