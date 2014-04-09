@@ -1,3 +1,9 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+ }
+
 @font-face {
   font-family: 'Lato';
   src: url('../fonts/lato/lato-black.eot');
@@ -6326,10 +6332,8 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
 }
 .report-hdrs {
   display: block;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 1em; 
+  padding: 1em;
+  text-align: center; 
 }
 .report-main {
   padding: 1em;
@@ -6338,6 +6342,9 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   background-color: #fbfbfb;
   border-radius: 3px;
   box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
-  margin: 2px 2px 16px;
-  padding: 1em;
+  margin: 5px;
+  padding: .5em;
+}
+.report-box ul li {
+  list-style: none;
 }
