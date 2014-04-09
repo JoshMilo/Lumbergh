@@ -15,6 +15,9 @@
   margin-right: auto;
   width: 25%;
 }
+/* end helper classes */
+
+
 .sub-hdr {
   width: 15%;
 }
@@ -24,4 +27,24 @@
 }
 .myclass {
   font-size: 20px;
+}
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+.report-sidebar {
+  background-color: red !important;
 }

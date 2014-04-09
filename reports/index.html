@@ -2,64 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>QA Report</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
   <link rel="stylesheet" href="css/flat-ui.css">
-  <link rel="stylesheet" href="css/main.css">
+  <script src="js/handlebars-v1.3.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="js/sugar.js"></script>
 </head>
 <body class="container">
 
-<a href="/template.html">template</a>
+<script id="stylestat-template" type="text/x-handlebars-template">
 
-<div class="pure-g-r">
-  <div class="pure-u-1">
-    <h1 class="header">Lumbergh Report</h1>
-    <p class="sub-hdr">Stylesheet Snapshot</p>
+
+
+<div class="pure-g report-sidebar">
+  <div class="pure-u-1 report-hdrs">
+    <h3>T.P.S Report</h3>
+    <p>Stylesheet Snapshot</p>
   </div>
 </div>
 
-<div class="pure-g-r">
-  <div class="pure-u-1-1">
-    <table class="pure-table table table-bordered">
-      <thead>
-        <tr>
-          <th>Published</th>
-          <th>Paths</th>
-          <th>Files</th>
-          <th>Size</th>
-          <th>Rules</th>
-          <th>Selectors</th>
-          <th>Simplicity</th>
-          <th>Most Used</th>
-          <th>Media Queries</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{published}}</td>
-          <td>{{paths}}</td>
-          <td>{{stylesheets}}</td>
-          <td>{{size}}</td>
-           <td>{{rules}}</td>
-           <td>{{selectors}}</td>
-           <td>{{simplicity}}</td>
-           <td>{{mostIdentifiersSelector}}</td> 
-           <td>{{mediaQueries}}</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="pure-g-r report-main">
+  <div class="pure-u-19-24 report-box">
+    <h4>Filepaths</h4>
+    <ol>
+    {{#each paths}}
+    <li>Path: {{this}}</li>
+    {{/each}}
+    </ol>
+  </div>  <!--end pure-u-1-->
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Published</h6>
+      <p>{{published}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Files</h6>
+      <p>{{stylesheets}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Size (bytes)</h6>
+      <p>{{size}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Rules</h6>
+      <p>{{rules}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Selectors</h6>
+      <p>{{selectors}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Simplicity</h6>
+      <p>{{simplicity}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Most Used</h6>
+      <p>{{mostIdentifersSelector}}</p>
+    </div>
+
+    <div class="pure-u-1-4 report-box">
+      <h6>Media Queries</h6>
+      <p>{{mediaQueries}}</p>
+    </div>
+
+
+
+
+  <div class="pure-u-1-4 report-box">
+    <h6>Unique Fonts: {{totalUniqueFontSizes}}</h6>
+    <ul>
+    {{#each uniqueFontSize}}
+      <li>{{this}}</li>
+    {{/each}}
+    </ul>
+  </div> <!--end pure pure-u-1-4-->
+  <div class="pure-u-1-4 report-box">
+    <h6>Unique Colors: {{totalUniqueColors}}</h6>
+    <ul>
+    {{#each uniqueColor}}
+      <li><span style="background-color:{{this}}; width: 1em; height: 1em;display: inline-block; margin-right: 5px; position:relative; top:3px"></span>{{this}}</li>
+    {{/each}}
+    </ul>
+  </div> <!--end pure pure-u-1-4-->
+  <div class="pure-u-1-4 report-box">
+    <h6>Misc</h6>
+    <ul>
+      <li>IDs: {{idSelectors}}</li>
+      <li>Important: {{importantKeywords}}</li>
+      <li>Float Properties: {{floatProperties}}</li>
+
+    </ul>
+  </div> <!--end pure pure-u-1-4-->
+
+</div> <!--end pure-g -->
+
+
+</script>
+
+
+  <!--loads the handlebars template-->
+  <script>
+    $(function() {
+      var raw_template = $('#stylestat-template').html();
+      var template = Handlebars.compile(raw_template);
+      var placeHolder = $("#main");
+      $.getJSON("json/stylestats.json", function(data) {
+        var html = template(data);
+        placeHolder.append(html);
+      });
+    }); //end document ready
+  </script>
+
+
+  <div id="main">
+
   </div>
-</div> <!--end pure-g-r -->
-
-<div class="pure-g-r">
-  <div class="pure-u-1-4">
-    <h2>Unique Font Sizes: {{totalUniqueFontSizes}}</h2>
-
-  </div>
-  <div class="pure-u-1-4"></div>
-  <div class="pure-u-1-4"></div>
-</div> <!--end pure-g-r -->
-
 </body>
 </html>

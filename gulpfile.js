@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     uncss = require('gulp-uncss'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util'),
+    stylestats = require('gulp-stylestats-report'),
     clean = require('gulp-clean');
 
 var fs = require('fs'),
@@ -49,6 +50,12 @@ gulp.task('wildstyle', function() {
     .pipe(csslint())
     .pipe(csslint.reporter(jsonReporter))
     .pipe(notify("All right, all right, all right! CSS busted"));
+});
+
+gulp.task('stylestats', function() {
+  return gulp.src('build/css/*.css')
+    .pipe(stylestats({reportDir: './reports/json'}))
+    .pipe(notify("stylestats report generated."));
 });
 
 gulp.task('validation', function() {
@@ -106,6 +113,7 @@ gulp.task('reports-index', function (cb) {
   var reports = fs.readdirSync('./reports/json/');
   var output = {
     css: [],
+    stylestats: [],
     html: [],
     js: []
   };
@@ -114,6 +122,7 @@ gulp.task('reports-index', function (cb) {
     if (/^csshint/.test(reports[i])) output.css.push(reports[i]);
     if (/^jshint/.test(reports[i])) output.js.push(reports[i]);
     if (/^htmlhint/.test(reports[i])) output.html.push(reports[i]);
+    if (/^stylestats/.test(reports[i])) output.stylestats.push(reports[i]);
   };
 
   fs.writeFileSync(reportsDir + '/index.json', JSON.stringify(output, null, 2));
@@ -122,5 +131,5 @@ gulp.task('reports-index', function (cb) {
 });
 
 gulp.task('generate-reports', function (cb) {
-  runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark'], 'reports-index', cb);
+  runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
 });

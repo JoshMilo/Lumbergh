@@ -3,3 +3,4 @@
 *.DS_Store
 *.log
 reports/json
+/.codekit-cache/
