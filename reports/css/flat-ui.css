@@ -414,6 +414,9 @@ you can use the generic selector below, but it's slower:
   border-bottom-color: #34495e !important;
   border-top-color: #34495e !important;
 }
+body, html {
+  height: 100%;
+}
 body {
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -6306,4 +6309,35 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
 .mhl,
 .mal {
   margin-left: 20px !important;
+}
+
+/* my styles */
+.container, #main {
+  height: 100%;
+}
+.report-sidebar {
+  background-color: #ecf0f1;
+  height: 100%;
+  float: left;
+}
+.center-block {
+  margin-left: auto;
+  margin-right: auto;
+}
+.report-hdrs {
+  display: block;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 1em; 
+}
+.report-main {
+  padding: 1em;
+}
+.report-box {
+  background-color: #fbfbfb;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+  margin: 2px 2px 16px;
+  padding: 1em;
 }
