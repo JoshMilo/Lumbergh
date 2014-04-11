@@ -4,3 +4,4 @@
 *.log
 reports/json
 /.codekit-cache/
+.idea
