@@ -37,6 +37,9 @@ var c = new Crawler({
   maxConnections: 10,
   skipDuplicates: true,
   onDrain: function () {
+    if (fs.existsSync(buildPath + 'js/')) {
+      fs.createReadStream('./.jshintrc').pipe(fs.createWriteStream(buildPath + 'js/.jshintrc'));
+    }
     console.log('Finished');
   },
   callback: function (err, result, $) {
