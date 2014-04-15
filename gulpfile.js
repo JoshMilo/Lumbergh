@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs'),
     gulputil = require('gulp-util'),
     stylestats = require('gulp-stylestats-report'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    cssValidation = require('gulp-css-validator');
 
 var fs = require('fs'),
     mkdirp = require('mkdirp'),
@@ -54,6 +55,11 @@ gulp.task('stylestats', function() {
   return gulp.src('build/css/*.css')
     .pipe(stylestats({reportDir: './reports/json'}))
     .pipe(notify("stylestats report generated."));
+});
+
+gulp.task('css-validation', function() {
+  return gulp.src('build/css/*.css')
+    .pipe(cssValidation());
 });
 
 gulp.task('validation', function() {
@@ -129,5 +135,5 @@ gulp.task('reports-index', function (cb) {
 });
 
 gulp.task('generate-reports', function (cb) {
-  runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
+  runSequence('clean-reports', 'css-validation', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
 });
