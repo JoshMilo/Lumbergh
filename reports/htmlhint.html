@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Report</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+  <link rel="stylesheet" href="css/flat-ui.css">
+  <script src="js/handlebars-v1.3.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/sugar.js"></script>
+</head>
+<body class="container">
+
+<script id="htmlhint-template" type="text/x-handlebars-template">
+ 
+
+<div class="pure-g-r report-sidebar">
+  <div class="pure-u-1">
+    <div class="report-hdrs">
+      <h3>T.P.S. Report</h3>      
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">CSS</a></li>
+        <li><a href="htmlhint.html">HTML</a></li>
+        <li><a href="#">Javascript</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="pure-g-r report-main">
+  <div class="pure-u-24-24">
+  <h1 style="text-align:center;">HTML Hint</h1>
+    <div class="report-box">
+        <ul>
+          <li>Passed?: {{success}}</li>
+          <li>Error Count: {{errorCount}}</li>
+        </ul>
+    </div>
+  </div>  <!--end pure-u-24-24-->
+
+  <div class="pure-u-24-24">
+    <h6>Message Log</h6>
+      {{#each messages}}
+      <div class="report-box">
+      <p>File: {{file}}</p>
+      <ol>
+        <li>type: {{error.type}}</li>
+        <li>message: {{error.message}}</li>
+        <li>Raw: {{error.raw}}</li>
+        <li>Line Number: {{error.line}}</li>
+        <li>Colum: {{error.col}}</li>
+        <li>evidence: {{error.evidence}}</li>
+      </ol>
+    </div>
+    {{/each}}
+  </div>
+
+</div> <!--end pure-g-->
+
+
+</script>
+
+
+<!-- END TEMPLATE -->
+
+<!--loads the handlebars template-->
+  <script>
+    $(function() {
+      var raw_template = $('#htmlhint-template').html();
+      var template = Handlebars.compile(raw_template);
+      var placeHolder = $("#main");
+      $.getJSON("json/htmlhint-index.json", function(data) {
+        var html = template(data);
+        placeHolder.append(html);
+      });
+    }); //end document ready
+  </script>
+
+
+<div id="main">
+
+</div>
+</body>
+</html>

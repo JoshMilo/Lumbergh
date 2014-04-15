@@ -14,100 +14,132 @@
 <script id="stylestat-template" type="text/x-handlebars-template">
 
 
-
-<div class="pure-g report-sidebar">
-  <div class="pure-u-1 report-hdrs">
-    <h3>T.P.S Report</h3>
-    <p>Stylesheet Snapshot</p>
+<div class="pure-g-r report-sidebar">
+  <div class="pure-u-1">
+    <div class="report-hdrs">
+      <h3>T.P.S. Report</h3>      
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">CSS</a></li>
+        <li><a href="htmlhint.html">HTML</a></li>
+        <li><a href="#">Javascript</a></li>
+      </ul>
+    </nav>
   </div>
 </div>
 
 <div class="pure-g-r report-main">
-  <div class="pure-u-19-24 report-box">
-    <h4>Filepaths</h4>
-    <ol>
-    {{#each paths}}
-    <li>Path: {{this}}</li>
-    {{/each}}
-    </ol>
+  <div class="pure-u-24-24">
+    <h4>Style Stats</h4>
+    <div class="report-box">
+      <h6>Filepaths</h6>
+      <ol>
+      {{#each paths}}
+      <li>Path: {{this}}</li>
+      {{/each}}
+      </ol>
+    </div>
   </div>  <!--end pure-u-1-->
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Published</h6>
-      <p>{{published}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Published</h6>
+        <p>{{published}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Files</h6>
-      <p>{{stylesheets}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Files</h6>
+        <p>{{stylesheets}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Size (bytes)</h6>
-      <p>{{size}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Size (bytes)</h6>
+        <p>{{size}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Rules</h6>
-      <p>{{rules}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Rules</h6>
+        <p>{{rules}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Selectors</h6>
-      <p>{{selectors}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Selectors</h6>
+        <p>{{selectors}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Simplicity</h6>
-      <p>{{simplicity}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Simplicity</h6>
+        <p>{{simplicity}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Most Used</h6>
-      <p>{{mostIdentifersSelector}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Most Used</h6>
+        <p>{{mostIdentifersSelector}}</p>
+      </div>
     </div>
 
-    <div class="pure-u-1-4 report-box">
-      <h6>Media Queries</h6>
-      <p>{{mediaQueries}}</p>
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Media Queries</h6>
+        <p>{{mediaQueries}}</p>
+      </div>
     </div>
 
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Unique Fonts: {{totalUniqueFontSizes}}</h6>
+        <ul>
+          {{#each uniqueFontSize}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div> <!--end pure pure-u-1-4-->
+    
+    <div class="pure-u-1-4">
+      <div class="report-box">
+        <h6>Unique Colors: {{totalUniqueColors}}</h6>
+        <ul>
+          {{#each uniqueColor}}
+          <li><span style="background-color:{{this}}; width: 1em; height: 1em;display: inline-block; margin-right: 5px; position:relative; top:3px"></span>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div> <!--end pure pure-u-1-4-->
 
-
-
-  <div class="pure-u-1-4 report-box">
-    <h6>Unique Fonts: {{totalUniqueFontSizes}}</h6>
-    <ul>
-    {{#each uniqueFontSize}}
-      <li>{{this}}</li>
-    {{/each}}
-    </ul>
-  </div> <!--end pure pure-u-1-4-->
-  <div class="pure-u-1-4 report-box">
-    <h6>Unique Colors: {{totalUniqueColors}}</h6>
-    <ul>
-    {{#each uniqueColor}}
-      <li><span style="background-color:{{this}}; width: 1em; height: 1em;display: inline-block; margin-right: 5px; position:relative; top:3px"></span>{{this}}</li>
-    {{/each}}
-    </ul>
-  </div> <!--end pure pure-u-1-4-->
-  <div class="pure-u-1-4 report-box">
-    <h6>Misc</h6>
-    <ul>
-      <li>IDs: {{idSelectors}}</li>
-      <li>Important: {{importantKeywords}}</li>
-      <li>Float Properties: {{floatProperties}}</li>
-
-    </ul>
+  <div class="pure-u-1-4">
+    <div class="report-box">
+      <h6>Misc</h6>
+      <ul>
+        <li>IDs: {{idSelectors}}</li>
+        <li>Important: {{importantKeywords}}</li>
+        <li>Float Properties: {{floatProperties}}</li>
+      </ul>
+    </div>
   </div> <!--end pure pure-u-1-4-->
 
 </div> <!--end pure-g -->
 
 
-</script>
 
+</script> 
 
-  <!--loads the handlebars template-->
+<!-- END TEMPLATE -->
+
+<!--loads the handlebars template-->
   <script>
     $(function() {
       var raw_template = $('#stylestat-template').html();
@@ -121,8 +153,8 @@
   </script>
 
 
-  <div id="main">
+<div id="main">
 
-  </div>
+</div>
 </body>
 </html>

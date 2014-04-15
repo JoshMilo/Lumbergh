@@ -1,5 +1,3 @@
-// QA specific gulpfile. Had problems with csscss so haven't put that in yet.
-
 var gulp = require('gulp'),
     cleanhtml = require('gulp-cleanhtml'),
     csslint = require('gulp-csslint'),

@@ -6332,7 +6332,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   padding: 1em; 
 }
 .report-main {
-  padding: 1em;
+  padding: .6em;
 }
 .report-box {
   background-color: #fbfbfb;
