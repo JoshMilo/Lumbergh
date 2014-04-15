@@ -8,11 +8,12 @@
   <script src="js/handlebars-v1.3.0.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="js/sugar.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </head>
 <body class="container">
 
 <script id="htmlhint-template" type="text/x-handlebars-template">
- 
+
 
 <div class="pure-g-r report-sidebar">
   <div class="pure-u-1">
@@ -31,36 +32,40 @@
 
 <div class="pure-g-r report-main">
   <div class="pure-u-24-24">
-  <h1 style="text-align:center;">HTML Hint</h1>
-    <div class="report-box">
-        <ul>
-          <li>Passed?: {{success}}</li>
-          <li>Error Count: {{errorCount}}</li>
-        </ul>
-    </div>
+    <h1 style="text-align:center;">HTML Hint</h1>
+    <h3 style="text-align:center">Errors Found: {{errorCount}}</h3>
   </div>  <!--end pure-u-24-24-->
 
-  <div class="pure-u-24-24">
-    <h6>Message Log</h6>
+  <div class="pure-u-12-24">
       {{#each messages}}
       <div class="report-box">
-      <p>File: {{file}}</p>
-      <ol>
-        <li>type: {{error.type}}</li>
-        <li>message: {{error.message}}</li>
-        <li>Raw: {{error.raw}}</li>
-        <li>Line Number: {{error.line}}</li>
-        <li>Colum: {{error.col}}</li>
-        <li>evidence: {{error.evidence}}</li>
-      </ol>
-    </div>
+        <div class="cf">
+          <span class="pull-left">{{error.type}}</span>  
+          <span class="pull-right">{{error.line}}:{{error.col}}</span>
+        </div>
+        <div class="error-msg">
+          <img class="pull-right" src="img/frowny.png" alt="">
+          <p>Culprit: <code class="prettyprint">{{error.raw}}</code></p>
+          <p>Message: <code class="prettyprint">{{error.message}}</code></p>
+          <p>Code: <code class="prettyprint">{{error.evidence}}</code></p>
+          <p>Filepath: {{file}}</p>
+        </div>
+        <div class="fix">
+          <img class="pull-right" src="img/success.png">
+          <h6>Solution</h6>
+          <ol>
+            <li>{{error.rule.description}}</li>
+            <li>{{error.rule.link}}</li>
+          </ol>
+        </div>
+      </div>
     {{/each}}
   </div>
 
 </div> <!--end pure-g-->
 
 
-</script>
+ </script>
 
 
 <!-- END TEMPLATE -->
