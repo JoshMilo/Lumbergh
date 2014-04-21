@@ -59,7 +59,9 @@ gulp.task('stylestats', function() {
 
 gulp.task('css-validation', function() {
   return gulp.src('build/css/*.css')
-    .pipe(cssValidation());
+    .pipe(cssValidation({
+      allowHacks: true
+    }));
 });
 
 gulp.task('validation', function() {
