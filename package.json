@@ -38,6 +38,6 @@
     "run-sequence": "^0.3.6",
     "gulp-stylestats-report": "0.0.2",
     "crawler": "^0.2.5",
-    "gulp-css-validator": "0.0.0"
+    "gulp-css-validator": "0.0.4"
   }
 }
