@@ -12,13 +12,13 @@
 </head>
 <body class="container">
 
-<script id="htmlhint-template" type="text/x-handlebars-template">
+<script id="jshint-template" type="text/x-handlebars-template">
 
 
 <div class="pure-g-r report-sidebar">
   <div class="pure-u-1">
     <div class="report-hdrs">
-      <h3>T.P.S. Report</h3>      
+      <h3>T.P.S. Report</h3>
     </div>
     <nav>
       <ul>
@@ -37,25 +37,24 @@
   </div>  <!--end pure-u-24-24-->
 
   <div class="pure-u-18-24">
-      {{#each messages}}
+      {{#each results}}
       <div class="report-box">
         <div class="cf">
-          <span class="pull-left">{{error.type}}</span>  
-          <span class="pull-right">{{error.line}}:{{error.col}}</span>
+          <span class="pull-left">{{error.id}} </span>
+          <span>error code: {{error.code}}</span>
+          <span class="pull-right">{{error.line}}:{{error.character}}</span>
         </div>
         <div class="error-msg">
-          <img class="pull-right" src="img/frowny.png" alt="">
-          <p>Culprit: <code class="prettyprint">{{error.raw}}</code></p>
-          <p>Message: <code class="prettyprint">{{error.message}}</code></p>
-          <p>Code: <code class="prettyprint">{{error.evidence}}</code></p>
+          <img class="pull-right" src="img/frowny.png" alt="frowny face">
+          <p>Scope: {{error.scope}}</p>
+          <p>Culprit: <code class="prettyprint">{{error.evidence}}</code></p>
           <p>Filepath: {{file}}</p>
         </div>
         <div class="fix">
           <img class="pull-right" src="img/success.png">
-          <h6>Solution</h6>
+          <h6>Expected</h6>
           <ol>
-            <li>{{error.rule.description}}</li>
-            <li>{{error.rule.link}}</li>
+            <li><code class="prettyprint">{{error.reason}}</code></li>
           </ol>
         </div>
       </div>
@@ -73,10 +72,10 @@
 <!--loads the handlebars template-->
   <script>
     $(function() {
-      var raw_template = $('#htmlhint-template').html();
+      var raw_template = $('#jshint-template').html();
       var template = Handlebars.compile(raw_template);
       var placeHolder = $("#main");
-      $.getJSON("json/htmlhint-index.json", function(data) {
+      $.getJSON("json/jshint-test.json", function(data) {
         var html = template(data);
         placeHolder.append(html);
       });
