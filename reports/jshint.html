@@ -12,7 +12,7 @@
 </head>
 <body class="container">
 
-<script id="htmlhint-template" type="text/x-handlebars-template">
+<script id="jshint-template" type="text/x-handlebars-template">
 
 
 <div class="pure-g-r report-sidebar">
@@ -73,10 +73,10 @@
 <!--loads the handlebars template-->
   <script>
     $(function() {
-      var raw_template = $('#htmlhint-template').html();
+      var raw_template = $('#jshint-template').html();
       var template = Handlebars.compile(raw_template);
       var placeHolder = $("#main");
-      $.getJSON("json/htmlhint-index.json", function(data) {
+      $.getJSON("json/jshint-test.json", function(data) {
         var html = template(data);
         placeHolder.append(html);
       });
