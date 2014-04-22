@@ -137,5 +137,5 @@ gulp.task('reports-index', function (cb) {
 });
 
 gulp.task('generate-reports', function (cb) {
-  runSequence('clean-reports', 'css-validation', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
+  runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
 });
