@@ -18,13 +18,14 @@
 <div class="pure-g-r report-sidebar">
   <div class="pure-u-1">
     <div class="report-hdrs">
-      <h3>T.P.S. Report</h3>      
+      <h3>T.P.S. Report</h3>
     </div>
     <nav>
       <ul>
-        <li><a href="index.html">CSS</a></li>
-        <li><a href="htmlhint.html">HTML</a></li>
-        <li><a href="jshint.html">Javascript</a></li>
+        <li><a href="index.html">StyleStats</a></li>
+        <li><a href="csshint.html">CSS Hint</a></li>
+        <li><a href="htmlhint.html">HTML Hint</a></li>
+        <li><a href="jshint.html">JS Hint</a></li>
       </ul>
     </nav>
   </div>
@@ -40,7 +41,7 @@
       {{#each messages}}
       <div class="report-box">
         <div class="cf">
-          <span class="pull-left">{{error.type}}</span>  
+          <span class="pull-left">{{error.type}}</span>
           <span class="pull-right">{{error.line}}:{{error.col}}</span>
         </div>
         <div class="error-msg">
