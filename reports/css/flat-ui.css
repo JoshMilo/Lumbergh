@@ -6332,7 +6332,7 @@ body {
   text-align: center;
   margin-right: auto;
   margin-left: auto;
-  padding: 1em; 
+  padding: 1em;
 }
 .report-main {
   padding: .6em;
@@ -6379,7 +6379,7 @@ body {
   border: 1px solid #7ED321;
   padding: 0.5em;
 }
-.errors:before {
-  counter-increment: errors;
-  content: "errors" counter(errors);
+.report-box ul li {
+  list-style: none;
+}
 }
