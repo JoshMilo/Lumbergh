@@ -14,31 +14,8 @@
 
 <script id="csshint-template" type="text/x-handlebars-template">
 
-
-<div class="pure-g-r report-sidebar">
-  <div class="pure-u-1">
-    <div class="report-hdrs">
-      <h3>T.P.S. Report</h3>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">StyleStats</a></li>
-        <li><a href="csshint.html">CSS Hint</a></li>
-        <li><a href="htmlhint.html">HTML Hint</a></li>
-        <li><a href="jshint.html">JS Hint</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<div class="pure-g-r report-main">
-  <div class="pure-u-24-24">
-    <h1 style="text-align:center;">CSS Hint (in progress)</h1>
-    <h3 style="text-align:center">Errors Found: {{errorCount}}</h3>
-  </div>  <!--end pure-u-24-24-->
-
   <div class="pure-u-18-24">
-      {{#each messages}}
+      {{#each results}}
       <div class="report-box">
         <div class="cf">
           <span class="pull-left">{{error.type}}</span>
@@ -77,15 +54,40 @@
       var raw_template = $('#csshint-template').html();
       var template = Handlebars.compile(raw_template);
       var placeHolder = $("#main");
-      $.getJSON("json/csshint-marketing.json", function(data) {
-        var html = template(data);
-        placeHolder.append(html);
+      $.getJSON("json/index.json", function(data) {
+
+        $.each(data.css, function(key, value) {
+          $.getJSON('./json/' + value, function(data) {
+            var html = template(data);
+            placeHolder.append(html);
+          })
+        });
       });
     }); //end document ready
   </script>
 
 
 <div id="main">
+<div class="pure-g-r report-sidebar">
+  <div class="pure-u-1">
+    <div class="report-hdrs">
+      <h3>T.P.S. Report</h3>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">StyleStats</a></li>
+        <li><a href="csshint.html">CSS Hint</a></li>
+        <li><a href="htmlhint.html">HTML Hint</a></li>
+        <li><a href="jshint.html">JS Hint</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="pure-g-r report-main">
+  <div class="pure-u-24-24">
+    <h1 style="text-align:center;">CSS Hint (in progress)</h1>
+    <h3 style="text-align:center">Errors Found: {{errorCount}}</h3>
+  </div>  <!--end pure-u-24-24-->
 
 </div>
 </body>

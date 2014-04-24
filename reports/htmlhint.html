@@ -77,10 +77,15 @@
       var raw_template = $('#htmlhint-template').html();
       var template = Handlebars.compile(raw_template);
       var placeHolder = $("#main");
-      $.getJSON("json/htmlhint-index.json", function(data) {
-        var html = template(data);
-        placeHolder.append(html);
-      });
+        $.getJSON("json/index.json", function(data) {
+
+          $.each(data.html, function(key, value) {
+            $.getJSON('./json/' + value, function(data) {
+              var html = template(data);
+              placeHolder.append(html);
+            })
+          });
+        });
     }); //end document ready
   </script>
 

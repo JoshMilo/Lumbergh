@@ -14,21 +14,7 @@
 <script id="stylestat-template" type="text/x-handlebars-template">
 
 
-<div class="pure-g-r report-sidebar">
-  <div class="pure-u-1">
-    <div class="report-hdrs">
-      <h3>T.P.S. Report</h3>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">StyleStats</a></li>
-        <li><a href="csshint.html">CSS Hint</a></li>
-        <li><a href="htmlhint.html">HTML Hint</a></li>
-        <li><a href="jshint.html">JS Hint</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
+
 
 <div class="pure-g-r report-main">
   <div class="pure-u-24-24">
@@ -146,16 +132,35 @@
       var raw_template = $('#stylestat-template').html();
       var template = Handlebars.compile(raw_template);
       var placeHolder = $("#main");
-      $.getJSON("json/stylestats.json", function(data) {
-        var html = template(data);
-        placeHolder.append(html);
+      $.getJSON("json/index.json", function(data) {
+
+        $.each(data.stylestats, function(key, value) {
+          $.getJSON('./json/' + value, function(data) {
+            var html = template(data);
+            placeHolder.append(html);
+          })
+        });
       });
     }); //end document ready
   </script>
 
 
 <div id="main">
-
+<div class="pure-g-r report-sidebar">
+  <div class="pure-u-1">
+    <div class="report-hdrs">
+      <h3>T.P.S. Report</h3>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">StyleStats</a></li>
+        <li><a href="csshint.html">CSS Hint</a></li>
+        <li><a href="htmlhint.html">HTML Hint</a></li>
+        <li><a href="jshint.html">JS Hint</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 </div>
 </body>
 </html>
