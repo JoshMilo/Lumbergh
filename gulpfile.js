@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     gulputil = require('gulp-util'),
     stylestats = require('gulp-stylestats-report'),
     clean = require('gulp-clean'),
-    cssValidation = require('gulp-css-validator');
+    cssValidation = require('gulp-css-validator'),
+    connect = require('connect');
 
 var fs = require('fs'),
     mkdirp = require('mkdirp'),
@@ -138,4 +139,9 @@ gulp.task('reports-index', function (cb) {
 
 gulp.task('generate-reports', function (cb) {
   runSequence('clean-reports', ['jshint', 'wildstyle', 'markymark', 'stylestats'], 'reports-index', cb);
+});
+
+gulp.task('server', function(next) {
+  var server = connect();
+  server.use(connect.static('./reports')).listen(9000, next);
 });
