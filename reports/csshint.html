@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/flat-ui.css">
   <script src="js/handlebars-v1.3.0.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="js/sugar.js"></script>
   <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </head>
 <body class="container">
@@ -15,25 +14,26 @@
 <script id="csshint-template" type="text/x-handlebars-template">
 
   <div class="pure-u-18-24">
+      <h4 class="error-header">Errors Found: {{errorCount}}</h4>
       {{#each results}}
       <div class="report-box">
         <div class="cf">
           <span class="pull-left">{{error.type}}</span>
-          <span class="pull-right">{{error.line}}:{{error.col}}</span>
+          <span class="pull-right">Line {{error.line}} : Col {{error.col}}</span>
         </div>
         <div class="error-msg">
           <img class="pull-right" src="img/frowny.png" alt="">
-          <p>Culprit: <code class="prettyprint">{{error.raw}}</code></p>
+          <p>Culprit: <strong>{{error.rule.id}}</strong></p>
           <p>Message: <code class="prettyprint">{{error.message}}</code></p>
           <p>Code: <code class="prettyprint">{{error.evidence}}</code></p>
           <p>Filepath: {{file}}</p>
         </div>
         <div class="fix">
           <img class="pull-right" src="img/success.png">
-          <h6>Solution</h6>
+          <h6>Hint</h6>
           <ol>
-            <li>{{error.rule.description}}</li>
-            <li>{{error.rule.link}}</li>
+            <li>{{error.rule.desc}}</li>
+            <li>Browsers: {{error.rule.browsers}}</li>
           </ol>
         </div>
       </div>
@@ -69,7 +69,7 @@
 
 <div id="main">
   <nav class="pure-menu pure-menu-open pure-menu-horizontal">
-    <a href="#" class="pure-menu-heading">T.P.S. Report</a>
+    <a href="index.html" class="pure-menu-heading">T.P.S. Report</a>
     <ul>
       <li><a href="index.html">StyleStats</a></li>
       <li><a href="csshint.html">CSS Hint</a></li>
@@ -81,8 +81,7 @@
 
 <div class="pure-g report-main">
   <div class="pure-u-24-24">
-    <h1 style="text-align:center;">CSS Hint (in progress)</h1>
-    <h3 style="text-align:center">Errors Found: {{errorCount}}</h3>
+    <h1 style="text-align:center;">CSS Hint</h1>
   </div>  <!--end pure-u-24-24-->
 
 </div>

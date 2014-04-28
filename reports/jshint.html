@@ -14,36 +14,14 @@
 
 <script id="jshint-template" type="text/x-handlebars-template">
 
-
-<div class="pure-g-r report-sidebar">
-  <div class="pure-u-1">
-    <div class="report-hdrs">
-      <h3>T.P.S. Report</h3>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">StyleStats</a></li>
-        <li><a href="csshint.html">CSS Hint</a></li>
-        <li><a href="htmlhint.html">HTML Hint</a></li>
-        <li><a href="jshint.html">JS Hint</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<div class="pure-g-r report-main">
-  <div class="pure-u-24-24">
-    <h1 style="text-align:center;">JS Hint</h1>
-    <h3 style="text-align:center">Errors Found: {{errorCount}}</h3>
-  </div>  <!--end pure-u-24-24-->
-
   <div class="pure-u-18-24">
+      <h4 class="error-header">Errors Found: {{errorCount}}</h4>
       {{#each results}}
       <div class="report-box">
         <div class="cf">
           <span class="pull-left">{{error.id}} </span>
           <span> {{error.code}}</span>
-          <span class="pull-right">{{error.line}}:{{error.character}}</span>
+          <span class="pull-right">Line {{error.line}} : Col {{error.character}}</span>
         </div>
         <div class="error-msg">
           <img class="pull-right" src="img/frowny.png" alt="frowny face">
@@ -90,7 +68,21 @@
 
 
 <div id="main">
+  <nav class="pure-menu pure-menu-open pure-menu-horizontal">
+    <a href="index.html" class="pure-menu-heading">T.P.S. Report</a>
+    <ul>
+      <li><a href="index.html">StyleStats</a></li>
+      <li><a href="csshint.html">CSS Hint</a></li>
+      <li><a href="htmlhint.html">HTML Hint</a></li>
+      <li><a href="jshint.html">JS Hint</a></li>
+    </ul>
+  </nav>
 
+
+<div class="pure-g report-main">
+  <div class="pure-u-24-24">
+    <h1 style="text-align:center;">JS Hint</h1>
+  </div>  <!--end pure-u-24-24-->
 </div>
 </body>
 </html>
