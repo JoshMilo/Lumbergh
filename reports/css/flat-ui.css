@@ -6358,6 +6358,7 @@ body {
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
  */
+
 .cf {
     *zoom: 1;
 }
@@ -6382,4 +6383,15 @@ body {
 .report-box ul li {
   list-style: none;
 }
+.report-header {
+  text-align: center;
+}
+.error-header {
+  text-align: center;
+  background: #BDC3C7;
+}
+.pure-menu {
+  margin: 0 auto;
+  text-align: center;
+  width: 500px;
 }
